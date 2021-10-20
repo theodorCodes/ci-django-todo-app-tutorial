@@ -16,6 +16,10 @@ import dj_database_url
 # IMPORT OS
 import os
 
+# DEVELOPMENT ENVIRONMENT,
+# requires the following setting in your .bashrc file in your system
+# export DEVELOPMENT='True'
+development = os.environ.get('DEVELOPMENT', False)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,12 +33,16 @@ SECRET_KEY = os.environ.get(
     'SECRET_KEY', 'django-insecure-d@%#ol5he=fnmj1fa1m(gukv4g25a!uo&2(koefu!8^phbm9@4')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = development
+
 
 # ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost',
-                 '192.168.1.3', os.environ.get('HEROKU_HOSTNAME')]
-
+# ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.1.3', os.environ.get('HEROKU_HOSTNAME')]
+if development:
+    ALLOWED_HOST = ['127.0.0.1', 'localhost', '192.168.1.3']
+else:
+    ALLOWED_HOSTS = [os.environ.get('HEROKU_HOSTNAME')]
 
 # Application definition
 
@@ -83,17 +91,18 @@ WSGI_APPLICATION = 'django_todo.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 # DEFAULT SETTINGS (lp1)
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-# NEW POSTGRES SETTINGS (lp1)
-DATABASES = {
-    'default': dj_database_url.parse('DATABASE_URL')
-}
+if development:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+else:
+    # NEW POSTGRES SETTINGS (lp1)
+    DATABASES = {
+        'default': dj_database_url.parse('DATABASE_URL')
+    }
 
 
 # Password validation
