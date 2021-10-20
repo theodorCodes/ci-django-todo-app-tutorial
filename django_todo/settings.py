@@ -28,7 +28,8 @@ SECRET_KEY = 'django-insecure-d@%#ol5he=fnmj1fa1m(gukv4g25a!uo&2(koefu!8^phbm9@4
 DEBUG = True
 
 # ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.1.3']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.1.3',
+                 'ci-django-todo-app-tutorial.herokuapp.com']
 
 
 # Application definition
@@ -87,7 +88,7 @@ WSGI_APPLICATION = 'django_todo.wsgi.application'
 
 # NEW POSTGRES SETTINGS (lp1)
 DATABASES = {
-    'default': dj_database_url.parse('postgres://gqikfcgrrwqzrc:a41e6f3cd84995bfa1a9d69fcd6c8a06f2101465adc2d48083c137c56550fdec@ec2-176-34-105-15.eu-west-1.compute.amazonaws.com:5432/d7u4oubv3cduvr')
+    'default': dj_database_url.parse('postgres://ohoogxkwjdlrzy:4f21396f15b8fc8e26539b8d8b8fb9705f16c7ded5233974c179f9019d18bf28@ec2-54-170-163-224.eu-west-1.compute.amazonaws.com:5432/df226dnveploa8')
 }
 
 
